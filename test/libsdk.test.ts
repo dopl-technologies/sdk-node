@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import TeleroboticSDK from '../dist/index'
+import { TeleroboticSDK } from '../dist/index'
 
 describe('libsdk test', () => {
     it('test function should return -1', () => {
