@@ -10,3 +10,8 @@ A node SDK used to connect to DOPL Technologies telerobotic services
 # Downloads libsdk
 $ GITHUB_TOKEN=<token_with_libsdk_repo_access> npm run download
 ```
+
+## Publish
+```shell
+$ GITHUB_TOKEN=<token_with_libsdk_repo_access> npm publish
+```
