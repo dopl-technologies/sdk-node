@@ -1,10 +1,9 @@
 language: node_js
 node_js:
 - 10.21.0
-script:
+before_install:
 - npm install typescript -g
 - npm run download
-- npm test
 deploy:
   provider: npm
   on:
