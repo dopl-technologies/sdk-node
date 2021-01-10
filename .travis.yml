@@ -3,7 +3,6 @@ node_js:
 - 10.21.0
 script:
 - npm install typescript -g
-- npm run tsc -- version
 - npm run download
 - npm test
 deploy:
