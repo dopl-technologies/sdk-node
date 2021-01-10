@@ -3,7 +3,7 @@ import Ref from "ref"
 import Struct from "ref-struct"
 import ArrayType from "ref-array"
 
-import CommonProtos from "@dopl-technologies/api-protos/common_pb"
+import * as Protos from "@dopl-technologies/api-protos"
 import logger from './winston'
 
 import GoString from './gostring'
@@ -25,7 +25,7 @@ const sdk = FFI.Library(libsdkPath, {
     "libsdk_connect": [Ref.types.void, [Ref.types.uint64]],
 })
 
-export default class Sdk {
+class TeleroboticSDK {
     _deviceServiceAddress: string
     _sessionServiceAddress: string
     _stateManagerServiceAddress: string
@@ -36,8 +36,8 @@ export default class Sdk {
     _consumes: number[]
     _onSessionJoined: (sessionID: number) => void
     _onSessionEnded: (sessionID: number) => void
-    _getFrameCallback: () => CommonProtos.Frame
-    _onFrameCallback: (frame: CommonProtos.Frame) => boolean
+    _getFrameCallback: () => Protos.CommonProtos.Frame
+    _onFrameCallback: (frame: Protos.CommonProtos.Frame) => boolean
     _sessionID: number
     _getFrameFreq: number
 
@@ -54,8 +54,8 @@ export default class Sdk {
         consumes: number[],
         onSessionJoined: (sessionID: number) => void,
         onSessionEnded: (sessionID: number) => void,
-        getFrameCallback: () => CommonProtos.Frame,
-        onFrameCallback: (frame: CommonProtos.Frame) => boolean,
+        getFrameCallback: () => Protos.CommonProtos.Frame,
+        onFrameCallback: (frame: Protos.CommonProtos.Frame) => boolean,
         sessionID: number = 0,
         getFrameFreq = 30) {
             this._deviceServiceAddress = deviceServiceAddress
@@ -132,7 +132,12 @@ export default class Sdk {
         // Create an appropriately sized Uint8Array view on top of the buffer
         const bufferUInt8 = new Uint8Array(buffer.buffer, 0, bufferSize)
 
-        const frame = CommonProtos.Frame.deserializeBinary(bufferUInt8)
+        const frame = Protos.CommonProtos.Frame.deserializeBinary(bufferUInt8)
         return this._onFrameCallback(frame)
     }
+}
+
+export {
+    Protos,
+    TeleroboticSDK,
 }
