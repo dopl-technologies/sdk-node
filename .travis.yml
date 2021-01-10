@@ -3,6 +3,7 @@ node_js:
 - 10.21.0
 script:
 - npm run download
+- npm test
 deploy:
   provider: npm
   on:
