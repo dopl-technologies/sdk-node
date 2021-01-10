@@ -6,10 +6,10 @@ before_install:
 - npm run download
 deploy:
   provider: npm
+  skip_cleanup: true
   on:
     branch: main
     tags: true
-    skip_cleanup: true
   email: ryan@dopltechnologies.com
   api_key:
     secure: hiBjEyBBrU6t4dEnEk+57Job4bYwsFftybJzpUQvzqBlWkUKTCzY8+nKa+J09OLJRdPCUv0XrxE8mUQwXErRVXO5jRCyOSml38WfTSv43DueOBCUl3a4z077xzF95VcgA/N8RDHccr+UWXZTSOgVlHfZA9j+hebqiLpzwhvfj0Wj5zK6/oefX5t3RxdwgWWr8aJZWD9yCfVVr6sb2ABYlPUAw7Nt8LuOKxRq4R8OOIK82Mm0mZxGuUU4G2cVUwdTx25adBIxCJGnHXye+ABd3Soao31IevbivlO5/VkIdx2KlYo51wr2ZyxwE3XKqJnwVOQyVj8OLR25wzmsVe2juM5lxytHiW0G+AAtAB+UQAxVxF6tLD60HaqFxU7KvCCCYV6mp+IIl6SGoQvb4BKP4eR/h09zcKEdqpnkNsZTyrm4ZF748qIUllmSd943qM1HgG4y1uQ8nrIk+sWlmyQQEbpN8//Gyv+qWdeiJH7XKajfGGL1aHwiYaLfO58qV6SwV8OktyTPjBeCnrggBY9IMHd6CC1/BJkUNm+nEhF22yD722Q/LYR69fqxHxehLYlOIT09M118nuLRAOcUVKMpTwE+y+A3nMdQb2cUFwHCCwYA8MbuA6r+YHwqQrJM6xxXp+9TZOKtUk3CqmyXT0DJQSOr3vMmZGL+Ls1x7n3Y1P4=
