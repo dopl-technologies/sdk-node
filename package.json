@@ -10,8 +10,8 @@
     "download": "test -n \"${GITHUB_TOKEN}\" && bash download_libsdk",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
-    "prepare": "npm run download && npm run build",
-    "prepublishOnly": "npm test && npm run lint",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run download && npm test && npm run lint",
     "preversion": "npm run lint",
     "test": "mocha -r ts-node/register test/**/*test.ts"
   },
@@ -60,5 +60,11 @@
   "files": [
     "dist/",
     "test/"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": "<=10.21.0"
+  }
 }
