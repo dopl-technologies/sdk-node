@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/dopl-technologies/sdk-node#readme",
   "dependencies": {
-    "@dopl-technologies/api-protos": "file:../sdk-node",
+    "@dopl-technologies/api-protos": "^1.0.2",
     "@types/ffi": "^0.2.3",
     "@types/ref": "0.0.28",
     "@types/ref-array": "0.0.28",
