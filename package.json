@@ -1,6 +1,6 @@
 {
   "name": "@dopl-technologies/telerobotic-sdk",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A node SDK used to connect to DOPL Technologies telerobotic services",
   "main": "./dist/index.js",
   "scripts": {
