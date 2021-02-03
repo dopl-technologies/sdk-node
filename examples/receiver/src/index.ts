@@ -1,4 +1,3 @@
-import { Coordinates } from '@dopl-technologies/api-protos/lib/common_pb';
 import { TeleroboticSDK, Protos } from '@dopl-technologies/telerobotic-sdk'
 
 const onSessionJoined = (sessionId: number) => {
