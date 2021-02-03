@@ -2,14 +2,16 @@ import FFI from "ffi"
 import Ref from "ref"
 import Struct from "ref-struct"
 import ArrayType from "ref-array"
+import os from 'os'
 
 import * as Protos from "@dopl-technologies/api-protos"
 import logger from './winston'
 
 import GoString from './gostring'
 import { GoSlice, UInt64Array } from './goslice'
+import { config } from "winston"
 
-const libsdkPath = __dirname + "/bin/libsdk"
+const libsdkPath = __dirname + "/bin/libsdk_amd64"
 
 // This creates a view on top of the data that is of sufficient size
 // to accommodate all the data that's coming from the sdk
@@ -21,76 +23,40 @@ const onFrame = FFI.Function(Ref.types.bool, [UCharArray, Ref.types.int])
 
 const sdk = FFI.Library(libsdkPath, {
     "libsdk_test": [ Ref.types.int, [] ],
-    "libsdk_initialize": [Ref.types.void, [GoString, GoString, GoString, Ref.types.uint64, Ref.types.uint32, GoString, GoSlice, GoSlice, onSession, onSession, getFrame, onFrame, Ref.types.uint64, Ref.types.int]],
-    "libsdk_connect": [Ref.types.void, [Ref.types.uint64]],
+    "libsdk_initialize": [Ref.types.int, [GoString, onSession, onSession, getFrame, onFrame]],
+    "libsdk_connect": [Ref.types.int, []],
 })
 
 class TeleroboticSDK {
-    _deviceServiceAddress: string
-    _sessionServiceAddress: string
-    _stateManagerServiceAddress: string
-    _deviceID: number
-    _devicePort: number
-    _deviceIP: string
-    _produces: number[]
-    _consumes: number[]
+    _configFilePath: string
     _onSessionJoined: (sessionID: number) => void
     _onSessionEnded: (sessionID: number) => void
     _getFrameCallback: () => Protos.CommonProtos.Frame
     _onFrameCallback: (frame: Protos.CommonProtos.Frame) => boolean
-    _sessionID: number
-    _getFrameFreq: number
 
     _handleGetFrameCallback: any
     _handleOnFrameCallback: any
 
-    constructor(deviceServiceAddress: string,
-        sessionServiceAddress: string,
-        stateManagerServiceAddress: string,
-        deviceID: number,
-        devicePort: number,
-        deviceIP: string,
-        produces: number[],
-        consumes: number[],
+    constructor(configFilePath: string,
         onSessionJoined: (sessionID: number) => void,
         onSessionEnded: (sessionID: number) => void,
         getFrameCallback: () => Protos.CommonProtos.Frame,
-        onFrameCallback: (frame: Protos.CommonProtos.Frame) => boolean,
-        sessionID: number = 0,
-        getFrameFreq = 30) {
-            this._deviceServiceAddress = deviceServiceAddress
-            this._sessionServiceAddress = sessionServiceAddress
-            this._stateManagerServiceAddress = stateManagerServiceAddress
-            this._deviceID = deviceID
-            this._devicePort = devicePort
-            this._deviceIP = deviceIP
-            this._produces = produces
-            this._consumes = consumes
+        onFrameCallback: (frame: Protos.CommonProtos.Frame) => boolean) {
+            this._configFilePath = configFilePath
             this._onSessionJoined = onSessionJoined
             this._onSessionEnded = onSessionEnded
             this._getFrameCallback = getFrameCallback
             this._onFrameCallback = onFrameCallback
-            this._sessionID = sessionID
-            this._getFrameFreq = getFrameFreq
 
             this._handleGetFrameCallback = this.handleGetFrame.bind(this)
             this._handleOnFrameCallback = this.handleOnFrame.bind(this)
 
             sdk.libsdk_initialize(
-                this._deviceServiceAddress,
-                this._sessionServiceAddress,
-                this._stateManagerServiceAddress,
-                this._deviceID,
-                this._devicePort,
-                this._deviceIP,
-                UInt64Array(this._produces),
-                UInt64Array(this._consumes),
+                this._configFilePath,
                 this._onSessionJoined,
                 this._onSessionEnded,
                 this._handleGetFrameCallback,
                 this._handleOnFrameCallback,
-                this._sessionID,
-                this._getFrameFreq,
             )
         }
     static test(): number {
@@ -99,7 +65,7 @@ class TeleroboticSDK {
 
     connect(): Promise<void> {
         return new Promise((resolve: (value?: void) => void, reject: (reason: any) => void) => {
-            sdk.libsdk_connect.async(this._deviceID, (err: any, res: any) => {
+            sdk.libsdk_connect.async((err: any, res: any) => {
                 if(err) {
                     reject(err)
                 }

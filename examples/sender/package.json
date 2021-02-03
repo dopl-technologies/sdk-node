@@ -1,0 +1,28 @@
+{
+  "name": "dopltech-sdk-sender",
+  "version": "1.0.0",
+  "description": "Example sending application",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpile-only ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dopl-technologies/sdk-node.git"
+  },
+  "keywords": [
+    "example"
+  ],
+  "author": "Ryan James",
+  "bugs": {
+    "url": "https://github.com/dopl-technologies/sdk-node/issues"
+  },
+  "homepage": "https://github.com/dopl-technologies/sdk-node#readme",
+  "dependencies": {
+    "@dopl-technologies/telerobotic-sdk": "file:../.."
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.1.1"
+  }
+}

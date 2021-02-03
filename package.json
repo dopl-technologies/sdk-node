@@ -1,6 +1,6 @@
 {
   "name": "@dopl-technologies/telerobotic-sdk",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A node SDK used to connect to DOPL Technologies telerobotic services",
   "main": "./dist/index.js",
   "scripts": {
@@ -43,7 +43,6 @@
     "ref": "^1.3.5",
     "ref-array": "^1.2.0",
     "ref-struct": "^1.1.0",
-    "ts-node-dev": "^1.0.0-pre.49",
     "typescript": "^3.9.5",
     "winston": "^3.3.3"
   },
@@ -55,7 +54,8 @@
     "mocha": "^8.0.1",
     "prettier": "^2.0.5",
     "tslint": "^6.1.2",
-    "tslint-config-prettier": "^1.18.0"
+    "tslint-config-prettier": "^1.18.0",
+    "ts-node-dev": "^1.0.0-pre.49"
   },
   "files": [
     "dist/",
