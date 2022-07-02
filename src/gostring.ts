@@ -1,5 +1,5 @@
-import Ref from "ref"
-import Struct from "ref-struct"
+import Ref from "ref-napi"
+import Struct from "ref-struct-napi"
 
 /*
  * GoString ABI-compliant struct

@@ -1,7 +1,7 @@
-import FFI from "ffi"
-import Ref from "ref"
-import Struct from "ref-struct"
-import ArrayType from "ref-array"
+import FFI from "ffi-napi"
+import Ref from "ref-napi"
+import Struct from "ref-struct-napi"
+import ArrayType from "ref-array-napi"
 import os from 'os'
 
 import * as Protos from "@dopl-technologies/api-protos"
@@ -29,8 +29,8 @@ const sdk = FFI.Library(libsdkPath, {
 
 class TeleroboticSDK {
     _configFilePath: string
-    _onSessionJoined: (sessionID: number) => void
-    _onSessionEnded: (sessionID: number) => void
+    _onSessionJoined: (sessionID: string | number) => void
+    _onSessionEnded: (sessionID: string | number) => void
     _getFrameCallback: () => Protos.CommonProtos.Frame
     _onFrameCallback: (frame: Protos.CommonProtos.Frame) => boolean
 
@@ -38,8 +38,8 @@ class TeleroboticSDK {
     _handleOnFrameCallback: any
 
     constructor(configFilePath: string,
-        onSessionJoined: (sessionID: number) => void,
-        onSessionEnded: (sessionID: number) => void,
+        onSessionJoined: (sessionID: string | number) => void,
+        onSessionEnded: (sessionID: string | number) => void,
         getFrameCallback: () => Protos.CommonProtos.Frame,
         onFrameCallback: (frame: Protos.CommonProtos.Frame) => boolean) {
             this._configFilePath = configFilePath

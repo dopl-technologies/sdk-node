@@ -1,6 +1,6 @@
-import Ref from "ref"
-import Struct from "ref-struct"
-import ArrayType from "ref-array"
+import Ref from "ref-napi"
+import Struct from "ref-struct-napi"
+import ArrayType from "ref-array-napi"
 
 export const UInt64Array = ArrayType(Ref.types.uint64)
 
