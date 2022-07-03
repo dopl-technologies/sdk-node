@@ -1,0 +1,38 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Release Build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  release-build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 18
+    - run: npm install
+    - run: npm run download
+      env:
+        GITHUB_TOKEN: ${{ secrets.DOPL_BUILDER_GITHUB_TOKEN }}
+    - run: npm test
+    - run: npm run build
+
+    - name: generate version
+      id: bump-version
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.DOPL_BUILDER_GITHUB_TOKEN }}
+        WITH_V: true
+        DRY_RUN: true
+        RELEASE_BRANCHES: main
+
+    - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
