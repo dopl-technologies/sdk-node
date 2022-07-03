@@ -1,10 +1,10 @@
 import { TeleroboticSDK, Protos } from '@dopl-technologies/telerobotic-sdk'
 
-const onSessionJoined = (sessionId: number) => {
+const onSessionJoined = (sessionId: string | number) => {
     console.log("Session joined", sessionId);
 }
 
-const onSessionEnded = (sessionId: number) => {
+const onSessionEnded = (sessionId: string | number) => {
     console.log("Session ended", sessionId);
 }
 
