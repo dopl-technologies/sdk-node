@@ -77,6 +77,9 @@ class TeleroboticSDK {
 
     private handleGetFrame(buffer: Buffer, bufferSizePtr: number[]): boolean {
         const frame = this._getFrameCallback()
+        if (!frame)
+            return false
+
         const frameBuffer = frame.serializeBinary()
 
         // Copy bytes from the frame to the given buffer
