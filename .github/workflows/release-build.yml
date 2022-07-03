@@ -36,3 +36,5 @@ jobs:
     - uses: JS-DevTools/npm-publish@v1
       with:
         token: ${{ secrets.NPM_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.DOPL_BUILDER_GITHUB_TOKEN }}
