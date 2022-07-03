@@ -10,7 +10,7 @@ const onSessionEnded = (sessionId: string | number) => {
 
 const getFrame = (): Protos.CommonProtos.Frame => {
     const frame = new Protos.CommonProtos.Frame()
-    return null
+    return frame
 }
 
 const onFrame = (frame: Protos.CommonProtos.Frame): boolean => {
