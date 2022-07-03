@@ -1,16 +1,16 @@
 import { TeleroboticSDK, Protos } from '@dopl-technologies/telerobotic-sdk'
 
-const onSessionJoined = (sessionId: number) => {
+const onSessionJoined = (sessionId: string | number) => {
     console.log("Session joined", sessionId);
 }
 
-const onSessionEnded = (sessionId: number) => {
+const onSessionEnded = (sessionId: string | number) => {
     console.log("Session ended", sessionId);
 }
 
 const getFrame = (): Protos.CommonProtos.Frame => {
     const frame = new Protos.CommonProtos.Frame()
-    return frame
+    return null
 }
 
 const onFrame = (frame: Protos.CommonProtos.Frame): boolean => {

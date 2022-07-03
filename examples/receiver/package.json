@@ -20,9 +20,9 @@
   },
   "homepage": "https://github.com/dopl-technologies/sdk-node#readme",
   "dependencies": {
-    "@dopl-technologies/telerobotic-sdk": "^1.1.1"
+    "@dopl-technologies/telerobotic-sdk": "file:../.."
   },
   "devDependencies": {
-    "ts-node-dev": "^1.1.1"
+    "ts-node-dev": "^2.0.0"
   }
 }
